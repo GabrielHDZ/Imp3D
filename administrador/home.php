@@ -1,10 +1,7 @@
 <?php include('templates/header.php') ?>
 <section>
     <article>
-<h1>Formulario de ingreso de datos</h1>
-    </article>
-    <article>
-        <h1>Tabla de presentaciond de informacion</h1>
+        aqui va la dashboard con la info general y estadisticas
     </article>
 </section>
 

@@ -8,12 +8,13 @@
     <title>Acceso ADministrador</title>
 </head>
 <body>
-    <?php $URL="http://".$_SERVER['HTTP_HOST']."/sitioweb-impresoras"?>
+    <?php $URL="http://".$_SERVER['HTTP_HOST']."/impresoras3d-php"?>
 <nav>
     <ul>
-        <li><a href="<?php echo $URL;?>">Pagina de Inicio</a></li>
+        <li><a href="<?php echo $URL;?>/administrador/home.php">estadisticas</a></li>
         <li><a href="<?php echo $URL?>/administrador/components/impresoras.php">Agregar Impresoras</a></li>
         <li><a href="#">Agregar Filamentos</a></li>
+        <li><a href="<?php echo $URL;?>">Inicio de usuarios</a></li>
         <li><a href="<?php echo $URL?>/administrador/components/cerrar.php">Cerrar sesion</a></li>
     </ul>
 </nav>
