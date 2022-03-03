@@ -5,7 +5,34 @@ $txtNombre=(isset($_POST['nombre']))?$_POST['nombre']:"";
 $txtimage=(isset($_FILES['imagen']['name']))?$_FILES['imagen']['name']:"";
 $accion=(isset($_POST['accion']))?$_POST['accion']:"";
 
-echo$txtId.$txtNombre.$txtimage.$accion
+include('../config/conexiondb.php');
+
+
+switch($accion){
+    case "agregar":
+        $sentencia=$con->prepare("INSERT INTO impresoras(nombre,imagen) value(:nombre,:imagen);");
+        $sentencia->bindParam(':nombre',$txtNombre);
+        $sentencia->bindParam(':imagen',$txtimage);
+        $sentencia->execute();        
+        break;
+    case "actualizar":
+        
+        break;
+    case "eliminar":
+
+        break;
+    case "seleccionar":
+
+        break;
+    case "borrar":
+        $sentenciaD=$con->prepare("DELETE FROM impresoras where id=:id");
+        $sentenciaD->bindParam(':id',$txtId);
+        $sentenciaD->execute();
+        break;
+}
+$datosTabla=$con->prepare("SELECT * FROM impresoras");
+$datosTabla->execute();
+$lista=$datosTabla->fetchAll(PDO::FETCH_ASSOC);
 ?>
 <section>
     <article>
@@ -30,16 +57,26 @@ echo$txtId.$txtNombre.$txtimage.$accion
                 <tr>
                     <th>clave</th>
                     <th>impresora</th>
+                    <th>Imagen</th>
                     <th>Opciones</th>
                 </tr>
                 
             </thead>
             <tbody>
+                <?php foreach($lista as $fila){?>
                 <tr>
-                    <td>222</td>
-                    <td>ender 3 pro</td>
-                    <td>Editar/Borrar</td>
+                    <td><?php echo $fila['id'];?></td>
+                    <td><?php echo $fila['nombre'];?></td>
+                    <td><?php echo $fila['imagen'];?></td>
+                    <td>
+                        <form method="post">
+                            <input type="hidden" name="id" id="id" value="<?php echo $fila['id'];?>"/>
+                            <input type="submit" name="accion" value="seleccionar"/>
+                            <button type="submit" name="accion" value="borrar">Borrar</button>
+                        </form>
+                    </td>
                 </tr>
+                <?php }?>
             </tbody>
         </table>
     </article>
